@@ -1,0 +1,15 @@
+@charset "utf-8";
+body,div,form,ul,li {
+    margin:0px;
+    padding:0px;}
+a {
+    text-decoration: none;}
+li {
+    list-style-type:none;}
+.function ul li {
+    text-align: center;
+    line-height:36px;
+    height:auto;
+    cursor: pointer;}
+.user-function,.user-list {
+    display: none;}
