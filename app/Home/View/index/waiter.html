@@ -29,18 +29,17 @@
         <div class="col-md-1" style="border: 1px solid #000000;">
             <div class="function">
                 <ul>
-                    <li class="function-li">订单管理</li>
-                    <div class="function-box">
-                        <div class="user-function">用户管理</div>
-                        <div class="user-list">
-                            <foreach name="data" item="vo">
-                                <a href="/order/index.php/Index/orderManagement/id/{$vo.id}" target="order" class="user-a">{$vo.dishesuser}</a>
+                    <li class="function-caipu-li">订单管理</li>
+                    <div class="function-caipu">
+                        <div class="cai-function">查看订单</div>
+                        <div class="cai-list">
+                            <foreach name="vieworder" item="vo">
+                                <a href="/order/index.php/Index/vieworder/id/{$vo.id}" target="order" class="cai-a">{$vo.username}</a>
                             </foreach>
                         </div>
                     </div>
-                    <li class="function-caipu-li">菜谱管理</li>
                     <div class="function-caipu">
-                        <div class="cai-function">菜系管理</div>
+                        <div class="cai-function">催菜</div>
                         <div class="cai-list">
                             <foreach name="data" item="vo">
                                 <a href="/order/index.php/Index/orderManagement/id/{$vo.id}" target="order" class="cai-a">{$vo.dishesuser}</a>
@@ -48,42 +47,14 @@
                         </div>
                     </div>
                     <div class="function-caipu">
-                        <div class="cai-function">菜类管理</div>
-                        <div class="cai-list">
-                            <foreach name="data" item="vo">
-                                <a href="/order/index.php/Index/orderManagement/id/{$vo.id}" target="order" class="cai-a">{$vo.dishesuser}</a>
-                            </foreach>
-                        </div>
-                    </div>
-                    <div class="function-caipu">
-                        <div class="cai-function">菜品管理</div>
+                        <div class="cai-function">结账</div>
                         <div class="cai-list">
                             <foreach name="data" item="vo">
                                 <a href="/order/index.php/Index/orderManagement/id/{$vo.id}/type/data" target="order" class="cai-a">{$vo.dishesuser}</a>
                             </foreach>
                         </div>
                     </div>
-                    <div class="function-caipu">
-                        <div class="cai-function">套餐管理</div>
-                        <div class="cai-list">
-                            <foreach name="data" item="vo">
-                                <a href="/order/index.php/Index/orderManagement/id/{$vo.id}" target="order" class="cai-a">{$vo.dishesuser}</a>
-                            </foreach>
-                        </div>
-                    </div>
                     <li>餐桌管理</li>
-                    <li>厨房管理</li>
-                    <li>财务管理</li>
-                    <li class="function-u">用户管理</li>
-                    <div class="function-user">
-                        <div class="users-function">所有用户</div>
-                        <div class="users-list">
-                            <foreach name="alluser" item="vo">
-                                <a href="/order/index.php/Index/oneuser/id/{$vo.id}" target="order" class="users-a">{$vo.username}</a>
-                            </foreach>
-                        </div>
-                        <a href="/order/index.php/Index/adduser" target="order" class="users-a">添加用户</a>
-                    </div>
                 </ul>
             </div>
         </div>

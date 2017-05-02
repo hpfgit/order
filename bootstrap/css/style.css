@@ -3,7 +3,8 @@ body,div,form,ul,li {
     margin:0px;
     padding:0px;}
 a {
-    text-decoration: none;}
+    text-decoration: none;
+    display: block;}
 li {
     list-style-type:none;}
 .function ul li {
@@ -11,5 +12,25 @@ li {
     line-height:36px;
     height:auto;
     cursor: pointer;}
-.user-function,.user-list {
+.user-function,.user-list,.cai-function,.cai-list,.users-function,.users-list {
+    display: none;
+    text-align: center;
+    text-indent: 2em;
+    cursor: pointer;}
+.user-list a,.cai-list a {
+    text-align: center;
+    text-indent: 2em;}
+.function-box,.function-user {display: none;}
+.cai-function,.cai-list {
     display: none;}
+td {
+    cursor: pointer;}
+.diancai {color: darkgreen;}
+.right,.center,.left {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    float: left;}
+.center,.left {border-left: none;}
+.num-p {float: left;}
+.userdata,.alluser {display: none;}

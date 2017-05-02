@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
@@ -29,61 +29,26 @@
         <div class="col-md-1" style="border: 1px solid #000000;">
             <div class="function">
                 <ul>
-                    <li class="function-li">订单管理</li>
-                    <div class="function-box">
-                        <div class="user-function">用户管理</div>
-                        <div class="user-list">
-                            <foreach name="data" item="vo">
-                                <a href="/order/index.php/Index/orderManagement/id/{$vo.id}" target="order" class="user-a">{$vo.dishesuser}</a>
-                            </foreach>
-                        </div>
-                    </div>
-                    <li class="function-caipu-li">菜谱管理</li>
+                    <li class="function-caipu-li">订单管理</li>
                     <div class="function-caipu">
-                        <div class="cai-function">菜系管理</div>
+                        <div class="cai-function">查看订单</div>
                         <div class="cai-list">
-                            <foreach name="data" item="vo">
-                                <a href="/order/index.php/Index/orderManagement/id/{$vo.id}" target="order" class="cai-a">{$vo.dishesuser}</a>
-                            </foreach>
+                            <?php if(is_array($vieworder)): foreach($vieworder as $key=>$vo): ?><a href="/order/index.php/Index/vieworder/id/<?php echo ($vo["id"]); ?>" target="order" class="cai-a"><?php echo ($vo["username"]); ?></a><?php endforeach; endif; ?>
                         </div>
                     </div>
                     <div class="function-caipu">
-                        <div class="cai-function">菜类管理</div>
+                        <div class="cai-function">催菜</div>
                         <div class="cai-list">
-                            <foreach name="data" item="vo">
-                                <a href="/order/index.php/Index/orderManagement/id/{$vo.id}" target="order" class="cai-a">{$vo.dishesuser}</a>
-                            </foreach>
+                            <?php if(is_array($data)): foreach($data as $key=>$vo): ?><a href="/order/index.php/Index/orderManagement/id/<?php echo ($vo["id"]); ?>" target="order" class="cai-a"><?php echo ($vo["dishesuser"]); ?></a><?php endforeach; endif; ?>
                         </div>
                     </div>
                     <div class="function-caipu">
-                        <div class="cai-function">菜品管理</div>
+                        <div class="cai-function">结账</div>
                         <div class="cai-list">
-                            <foreach name="data" item="vo">
-                                <a href="/order/index.php/Index/orderManagement/id/{$vo.id}/type/data" target="order" class="cai-a">{$vo.dishesuser}</a>
-                            </foreach>
-                        </div>
-                    </div>
-                    <div class="function-caipu">
-                        <div class="cai-function">套餐管理</div>
-                        <div class="cai-list">
-                            <foreach name="data" item="vo">
-                                <a href="/order/index.php/Index/orderManagement/id/{$vo.id}" target="order" class="cai-a">{$vo.dishesuser}</a>
-                            </foreach>
+                            <?php if(is_array($data)): foreach($data as $key=>$vo): ?><a href="/order/index.php/Index/orderManagement/id/<?php echo ($vo["id"]); ?>/type/data" target="order" class="cai-a"><?php echo ($vo["dishesuser"]); ?></a><?php endforeach; endif; ?>
                         </div>
                     </div>
                     <li>餐桌管理</li>
-                    <li>厨房管理</li>
-                    <li>财务管理</li>
-                    <li class="function-u">用户管理</li>
-                    <div class="function-user">
-                        <div class="users-function">所有用户</div>
-                        <div class="users-list">
-                            <foreach name="alluser" item="vo">
-                                <a href="/order/index.php/Index/oneuser/id/{$vo.id}" target="order" class="users-a">{$vo.username}</a>
-                            </foreach>
-                        </div>
-                        <a href="/order/index.php/Index/adduser" target="order" class="users-a">添加用户</a>
-                    </div>
                 </ul>
             </div>
         </div>
@@ -93,32 +58,32 @@
             <!--<div class="col-md-10" style="border: 1px solid #000000;">-->
                 <!--<div class="function-content">-->
                     <!--<ul>-->
-                        <!--<foreach name="data" item="vo">-->
+                        <!--<?php if(is_array($data)): foreach($data as $key=>$vo): ?>-->
                             <!--<li class="order-content">-->
                                 <!--<div class="container-fluid">-->
                                     <!--<form class="form-horizontal">-->
                                         <!--<div class="form-group">-->
                                             <!--<label for="inputEmail3" class="col-sm-1 control-label">姓名</label>-->
                                             <!--<div class="col-sm-11">-->
-                                                <!--<input type="text" class="form-control" id="inputEmail3" placeholder="姓名" value="{$vo.dishesuser}">-->
+                                                <!--<input type="text" class="form-control" id="inputEmail3" placeholder="姓名" value="<?php echo ($vo["dishesuser"]); ?>">-->
                                             <!--</div>-->
                                         <!--</div>-->
                                         <!--<div class="form-group">-->
                                             <!--<label for="inputPassword3" class="col-sm-1 control-label">菜名</label>-->
                                             <!--<div class="col-sm-11">-->
-                                                <!--<input type="text" class="form-control" id="inputPassword4" placeholder="菜名" value="{$vo.dishes}">-->
+                                                <!--<input type="text" class="form-control" id="inputPassword4" placeholder="菜名" value="<?php echo ($vo["dishes"]); ?>">-->
                                             <!--</div>-->
                                         <!--</div>-->
                                         <!--<div class="form-group">-->
                                             <!--<label for="inputPassword3" class="col-sm-1 control-label">数量</label>-->
                                             <!--<div class="col-sm-11">-->
-                                                <!--<input type="text" class="form-control" id="inputPassword5" placeholder="数量" value="{$vo.number}">-->
+                                                <!--<input type="text" class="form-control" id="inputPassword5" placeholder="数量" value="<?php echo ($vo["number"]); ?>">-->
                                             <!--</div>-->
                                         <!--</div>-->
                                         <!--<div class="form-group">-->
                                             <!--<label for="inputPassword3" class="col-sm-1 control-label">单价</label>-->
                                             <!--<div class="col-sm-11">-->
-                                                <!--<input type="text" class="form-control" id="inputPassword6" placeholder="单价" value="{$vo.price}">-->
+                                                <!--<input type="text" class="form-control" id="inputPassword6" placeholder="单价" value="<?php echo ($vo["price"]); ?>">-->
                                             <!--</div>-->
                                         <!--</div>-->
                                         <!--<div class="form-group">-->
@@ -129,7 +94,7 @@
                                     <!--</form>-->
                                 <!--</div>-->
                             <!--</li>-->
-                        <!--</foreach>-->
+                        <!--<?php endforeach; endif; ?>-->
                     <!--</ul>-->
                 <!--</div>-->
             <!--</div>-->
