@@ -102,6 +102,14 @@ class IndexController extends Controller {
         $this->assign("onevieworder",$onevieworder)->assign("onevieworderid",$onevieworderid);
         $this->display("user");
     }
+    // 所有的菜
+    public function cai(){
+        $model = M('caipu');
+        $caidata = $model->select();
+        $dataid = "dataid";
+        $this->assign('caidata',$caidata)->assign("dataid",$dataid);
+        $this->display('user');
+    }
     // 加菜
     public function adddish() {
         $model = M("userordering");

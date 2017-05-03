@@ -114,6 +114,18 @@
                                     <td>总价：<?php echo ($vo["total"]); ?></td>
                                 </tr><?php endforeach; endif; ?>
                         </table><?php endif; ?>
+                    <?php if($dataid == 'dataid'): ?><a href="" target="order">添加菜品</a>
+                        <table class="table table-striped table-bordered  table-hover table-condensed">
+                            <tr>
+                                <td>名字</td><td>类别</td><td>价格</td><td>操作</td>
+                            </tr>
+                            <?php if(is_array($caidata)): foreach($caidata as $key=>$vo): ?><tr>
+                                    <td><?php echo ($vo["cainame"]); ?></td>
+                                    <td><?php echo ($vo["caikd"]); ?></td>
+                                    <td><?php echo ($vo["caipc"]); ?></td>
+                                    <td><a href="">编辑</a><a href="/demo/index.php/Indexanchu/id/<?php echo ($vo["id"]); ?>">删除</a> </td>
+                                </tr><?php endforeach; endif; ?>
+                        </table><?php endif; ?>
                 </ul>
             </div>
         </div>

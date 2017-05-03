@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <li class="function-caipu-li">菜谱管理</li>
-                    <div class="function-caipu">
+                    <!-- <div class="function-caipu">
                         <div class="cai-function">菜系管理</div>
                         <div class="cai-list">
                             <?php if(is_array($data)): foreach($data as $key=>$vo): ?><a href="/order/index.php/Index/orderManagement/id/<?php echo ($vo["id"]); ?>" target="order" class="cai-a"><?php echo ($vo["dishesuser"]); ?></a><?php endforeach; endif; ?>
@@ -48,12 +48,12 @@
                         <div class="cai-list">
                             <?php if(is_array($data)): foreach($data as $key=>$vo): ?><a href="/order/index.php/Index/orderManagement/id/<?php echo ($vo["id"]); ?>" target="order" class="cai-a"><?php echo ($vo["dishesuser"]); ?></a><?php endforeach; endif; ?>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="function-caipu">
-                        <div class="cai-function">菜品管理</div>
-                        <div class="cai-list">
+                        <div class="cai-function"><a href="/order/index.php/Index/cai" target="order" class="cai-a">菜品管理</a></div>
+                        <!-- <div class="cai-list">
                             <?php if(is_array($data)): foreach($data as $key=>$vo): ?><a href="/order/index.php/Index/orderManagement/id/<?php echo ($vo["id"]); ?>/type/data" target="order" class="cai-a"><?php echo ($vo["dishesuser"]); ?></a><?php endforeach; endif; ?>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="function-caipu">
                         <div class="cai-function">套餐管理</div>
@@ -78,49 +78,6 @@
         <div class="col-md-10" style="border-top: 1px solid #000000;">
         <iframe name="order" src="/order/app/Home/View/index/user.html" frameborder="0" scrolling="no" id="order" width="100%" height="500" style="display: none;"></iframe>
         </div>
-            <!--<div class="col-md-10" style="border: 1px solid #000000;">-->
-                <!--<div class="function-content">-->
-                    <!--<ul>-->
-                        <!--<?php if(is_array($data)): foreach($data as $key=>$vo): ?>-->
-                            <!--<li class="order-content">-->
-                                <!--<div class="container-fluid">-->
-                                    <!--<form class="form-horizontal">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label for="inputEmail3" class="col-sm-1 control-label">姓名</label>-->
-                                            <!--<div class="col-sm-11">-->
-                                                <!--<input type="text" class="form-control" id="inputEmail3" placeholder="姓名" value="<?php echo ($vo["dishesuser"]); ?>">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label for="inputPassword3" class="col-sm-1 control-label">菜名</label>-->
-                                            <!--<div class="col-sm-11">-->
-                                                <!--<input type="text" class="form-control" id="inputPassword4" placeholder="菜名" value="<?php echo ($vo["dishes"]); ?>">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label for="inputPassword3" class="col-sm-1 control-label">数量</label>-->
-                                            <!--<div class="col-sm-11">-->
-                                                <!--<input type="text" class="form-control" id="inputPassword5" placeholder="数量" value="<?php echo ($vo["number"]); ?>">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label for="inputPassword3" class="col-sm-1 control-label">单价</label>-->
-                                            <!--<div class="col-sm-11">-->
-                                                <!--<input type="text" class="form-control" id="inputPassword6" placeholder="单价" value="<?php echo ($vo["price"]); ?>">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group">-->
-                                            <!--<div class="col-sm-offset-1 col-sm-10">-->
-                                                <!--<button type="submit" class="btn btn-default">Sign in</button>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            <!--</li>-->
-                        <!--<?php endforeach; endif; ?>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
