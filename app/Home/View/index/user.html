@@ -26,43 +26,25 @@
             <div class="function-content">
                 <ul>
                     <if condition="$userdataid eq 'userdataid'">
-                        <foreach name="userdata" item="vo">
-                            <li class="order-content">
-                                <div class="container-fluid">
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-1 control-label">姓名</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" class="form-control" id="inputEmail3" placeholder="姓名" value="{$vo.dishesuser}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword4" class="col-sm-1 control-label">菜名</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" class="form-control" id="inputPassword4" placeholder="菜名" value="{$vo.dishes}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword5" class="col-sm-1 control-label">数量</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" class="form-control" id="inputPassword5" placeholder="数量" value="{$vo.number}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword6" class="col-sm-1 control-label">单价</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" class="form-control" id="inputPassword6" placeholder="单价" value="{$vo.price}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-1 col-sm-10">
-                                                <button type="submit" class="btn btn-default">Sign in</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                        </foreach>
+                        <li class="order-content">
+                            <div class="container-fluid">
+                                <table class="table table-striped table-bordered  table-hover table-condensed">
+                                    <tr>
+                                        <td>信息</td><td>菜名</td><td>单价</td><td>数量</td><td>备注</td><td>操作</td>
+                                    </tr>
+                                    <foreach name="userdata" item="vo">
+                                        <tr>
+                                            <td>餐桌号：{$vo.number}</td>
+                                            <td>{$vo.dishes}</td>
+                                            <td>{$vo.price}</td>
+                                            <td>数量：：</td>
+                                            <td>{$vo.beizhu}</td>
+                                            <td><if condition="$vo.state eq '1'">已处理<else/><a href="/order/index.php/Index/modifystate/id/{$vo.id}">修改状态为已处理</a> </else></if></td>
+                                        </tr>
+                                    </foreach>
+                                </table>
+                            </div>
+                        </li>
                     </if>
                     <if condition="$oneuserid eq 'oneuserid'">
                         <foreach name="oneuser" item="vo">
@@ -108,6 +90,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="inputPassword4" class="col-sm-1 control-label">权限</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="inputPassword4" name="jurisdiction" placeholder="权限">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <div class="col-sm-offset-1 col-sm-10">
                                             <button type="submit" class="btn btn-default">Sign in</button>
                                         </div>
@@ -129,17 +117,32 @@
                         </table>
                     </if>
                     <if condition="$dataid eq 'dataid'">
-                        <a href="" target="order">添加菜品</a>
+                        <a href="/order/index.php/Index/addpackage" target="order">添加菜品</a>
                         <table class="table table-striped table-bordered  table-hover table-condensed">
                             <tr>
                                 <td>名字</td><td>类别</td><td>价格</td><td>操作</td>
                             </tr>
                             <foreach name="caidata" item="vo">
                                 <tr>
+                                    <td>{$vo.dishes}</td>
+                                    <td>{$vo.packagename}</td>
+                                    <td>{$vo.price}</td>
+                                    <td><a href="">编辑</a><a href="/order/index.php/Index/anchu/id/{$vo.id}">删除</a> </td>
+                                </tr>
+                            </foreach>
+                        </table>
+                    </if>
+                    <if condition="$packageid eq 'packageid'">
+                        <table class="table table-striped table-bordered  table-hover table-condensed">
+                            <tr>
+                                <td>名字</td><td>类别</td><td>价格</td><td>操作</td>
+                            </tr>
+                            <foreach name="package" item="vo">
+                                <tr>
                                     <td>{$vo.cainame}</td>
                                     <td>{$vo.caikd}</td>
                                     <td>{$vo.caipc}</td>
-                                    <td><a href="">编辑</a><a href="/demo/index.php/Indexanchu/id/{$vo.id}">删除</a> </td>
+                                    <td><a href="">编辑</a><a href="/order/index.php/Index/anchu/id/{$vo.id}">删除</a> </td>
                                 </tr>
                             </foreach>
                         </table>

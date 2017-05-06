@@ -25,41 +25,23 @@
         <div class="col-md-10">
             <div class="function-content">
                 <ul>
-                    <?php if($userdataid == 'userdataid'): if(is_array($userdata)): foreach($userdata as $key=>$vo): ?><li class="order-content">
-                                <div class="container-fluid">
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-1 control-label">姓名</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" class="form-control" id="inputEmail3" placeholder="姓名" value="<?php echo ($vo["dishesuser"]); ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword4" class="col-sm-1 control-label">菜名</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" class="form-control" id="inputPassword4" placeholder="菜名" value="<?php echo ($vo["dishes"]); ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword5" class="col-sm-1 control-label">数量</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" class="form-control" id="inputPassword5" placeholder="数量" value="<?php echo ($vo["number"]); ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword6" class="col-sm-1 control-label">单价</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" class="form-control" id="inputPassword6" placeholder="单价" value="<?php echo ($vo["price"]); ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-1 col-sm-10">
-                                                <button type="submit" class="btn btn-default">Sign in</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li><?php endforeach; endif; endif; ?>
+                    <?php if($userdataid == 'userdataid'): ?><li class="order-content">
+                            <div class="container-fluid">
+                                <table class="table table-striped table-bordered  table-hover table-condensed">
+                                    <tr>
+                                        <td>信息</td><td>菜名</td><td>单价</td><td>数量</td><td>备注</td><td>操作</td>
+                                    </tr>
+                                    <?php if(is_array($userdata)): foreach($userdata as $key=>$vo): ?><tr>
+                                            <td>餐桌号：<?php echo ($vo["number"]); ?></td>
+                                            <td><?php echo ($vo["dishes"]); ?></td>
+                                            <td><?php echo ($vo["price"]); ?></td>
+                                            <td>数量：：</td>
+                                            <td><?php echo ($vo["beizhu"]); ?></td>
+                                            <td><?php if($vo["state"] == '1'): ?>已处理<?php else: ?><a href="/order/index.php/Index/modifystate/id/<?php echo ($vo["id"]); ?>">修改状态为已处理</a> </else><?php endif; ?></td>
+                                        </tr><?php endforeach; endif; ?>
+                                </table>
+                            </div>
+                        </li><?php endif; ?>
                     <?php if($oneuserid == 'oneuserid'): if(is_array($oneuser)): foreach($oneuser as $key=>$vo): ?><li class="order-content">
                                 <div class="container-fluid">
                                     <form class="form-horizontal">
@@ -99,6 +81,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="inputPassword4" class="col-sm-1 control-label">权限</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" class="form-control" id="inputPassword4" name="jurisdiction" placeholder="权限">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <div class="col-sm-offset-1 col-sm-10">
                                             <button type="submit" class="btn btn-default">Sign in</button>
                                         </div>
@@ -114,16 +102,27 @@
                                     <td>总价：<?php echo ($vo["total"]); ?></td>
                                 </tr><?php endforeach; endif; ?>
                         </table><?php endif; ?>
-                    <?php if($dataid == 'dataid'): ?><a href="" target="order">添加菜品</a>
+                    <?php if($dataid == 'dataid'): ?><a href="/order/index.php/Index/addpackage" target="order">添加菜品</a>
                         <table class="table table-striped table-bordered  table-hover table-condensed">
                             <tr>
                                 <td>名字</td><td>类别</td><td>价格</td><td>操作</td>
                             </tr>
                             <?php if(is_array($caidata)): foreach($caidata as $key=>$vo): ?><tr>
+                                    <td><?php echo ($vo["dishes"]); ?></td>
+                                    <td><?php echo ($vo["packagename"]); ?></td>
+                                    <td><?php echo ($vo["price"]); ?></td>
+                                    <td><a href="">编辑</a><a href="/order/index.php/Index/anchu/id/<?php echo ($vo["id"]); ?>">删除</a> </td>
+                                </tr><?php endforeach; endif; ?>
+                        </table><?php endif; ?>
+                    <?php if($packageid == 'packageid'): ?><table class="table table-striped table-bordered  table-hover table-condensed">
+                            <tr>
+                                <td>名字</td><td>类别</td><td>价格</td><td>操作</td>
+                            </tr>
+                            <?php if(is_array($package)): foreach($package as $key=>$vo): ?><tr>
                                     <td><?php echo ($vo["cainame"]); ?></td>
                                     <td><?php echo ($vo["caikd"]); ?></td>
                                     <td><?php echo ($vo["caipc"]); ?></td>
-                                    <td><a href="">编辑</a><a href="/demo/index.php/Indexanchu/id/<?php echo ($vo["id"]); ?>">删除</a> </td>
+                                    <td><a href="">编辑</a><a href="/order/index.php/Index/anchu/id/<?php echo ($vo["id"]); ?>">删除</a> </td>
                                 </tr><?php endforeach; endif; ?>
                         </table><?php endif; ?>
                 </ul>

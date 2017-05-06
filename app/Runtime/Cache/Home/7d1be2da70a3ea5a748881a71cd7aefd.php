@@ -31,9 +31,9 @@
                 <ul>
                     <li class="function-li">订单管理</li>
                     <div class="function-box">
-                        <div class="user-function">用户管理</div>
-                        <div class="user-list">
-                            <?php if(is_array($data)): foreach($data as $key=>$vo): ?><a href="/order/index.php/Index/orderManagement/id/<?php echo ($vo["id"]); ?>" target="order" class="user-a"><?php echo ($vo["dishesuser"]); ?></a><?php endforeach; endif; ?>
+                        <div class="user-function user-a">
+                            <a href="/order/index.php/Index/administrationorder/state/0" target="order" class="user-a">未处理订单</a>
+                            <a href="/order/index.php/Index/administrationorder/state/1" target="order" class="user-a">已处理订单</a>
                         </div>
                     </div>
                     <li class="function-caipu-li">菜谱管理</li>
@@ -56,10 +56,10 @@
                         </div> -->
                     </div>
                     <div class="function-caipu">
-                        <div class="cai-function">套餐管理</div>
-                        <div class="cai-list">
+                        <div class="cai-function"><a href="/order/index.php/Index/package" target="order" class="cai-a">套餐管理</a></div>
+                        <!-- <div class="cai-list">
                             <?php if(is_array($data)): foreach($data as $key=>$vo): ?><a href="/order/index.php/Index/orderManagement/id/<?php echo ($vo["id"]); ?>" target="order" class="cai-a"><?php echo ($vo["dishesuser"]); ?></a><?php endforeach; endif; ?>
-                        </div>
+                        </div> -->
                     </div>
                     <li>餐桌管理</li>
                     <li>厨房管理</li>
@@ -76,7 +76,8 @@
             </div>
         </div>
         <div class="col-md-10" style="border-top: 1px solid #000000;">
-        <iframe name="order" src="/order/app/Home/View/index/user.html" frameborder="0" scrolling="no" id="order" width="100%" height="500" style="display: none;"></iframe>
+        <iframe name="order" src="/order/app/Home/View/index/user.html" frameborder="0" scrolling="auto" id="order" width="100%" height="500" style="display: block;"></iframe>
+            <div class="mask">初阳点餐系统</div>
         </div>
     </div>
 </div>
@@ -95,11 +96,12 @@
             if (user.css('display') == 'none') {
                 list.hide();
             }
-            user.click(function () {
-                list.toggle();
-            });
+//            user.click(function () {
+//                list.toggle();
+//            });
             list.click(function () {
                 $("#order").show();
+                $(".mask").hide();
             });
         });
         $(".function-u").click(function () {
@@ -116,10 +118,12 @@
             });
             list.click(function () {
                 $("#order").show();
+                $(".mask").hide();
             });
-            $(".users-a").click(function () {
-                $("#order").show();
-            });
+        });
+        $(".users-a").click(function () {
+            $("#order").show();
+            $(".mask").hide();
         });
         $(".function-caipu-li").click(function () {
             var list = $(".function-caipu"),
@@ -135,8 +139,13 @@
                 });
                 list.eq(index).find(".cai-a").click(function () {
                     $("#order").show();
+                    $(".mask").hide();
                 });
             });
+        });
+        $(".user-a").click(function () {
+            $("#order").show();
+            $(".mask").hide();
         });
     });
 </script>
