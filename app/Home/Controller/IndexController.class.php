@@ -2,9 +2,6 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
-    /*
-     * 插入数据 出错 缓存问题
-     * */
     public function index() {
         if (!empty($_POST)) {
             $model = M('user');
@@ -154,8 +151,18 @@ class IndexController extends Controller {
         $this->display('user');
     }
     // 添加菜品
-    public function addcaipin() {
-
+    public function adddishes() {
+        if (!empty($_POST)) {
+            $model = M("menu");
+            $data["dishes"] = I("post.dishes");
+            $data["package"] = 0;
+            $data["price"] = I("post.price");
+            $ret = $model->data($data)->add();
+            if ($ret) {
+                $this->success("添加成功！请稍后","/order/index.php/Index/cai",1);
+            }
+        }
+        $this->display("adddishes");
     }
     // 添加套餐
     public function addpackage() {
@@ -169,16 +176,16 @@ class IndexController extends Controller {
             if ($ret) {
                 $this->success("添加成功！","cai",1);
             }
-
         }
         $this->display("addpackage");
     }
     // 套餐管理
     public function package() {
-        $model = M("userordering");
+        $model = M("menu");
         $package = $model->where("package=1")->select();
         $packageid = "packageid";
         $this->assign("package",$package)->assign("packageid",$packageid);
+        $this->display("user");
     }
     // 传菜
     public function dish() {
@@ -207,5 +214,49 @@ class IndexController extends Controller {
                 $this->success("修改成功！", "/order/index.php/Index/orderManagement");
             }
         }
+    }
+    //获取地址
+    public function GetUrl() {
+        $url = $_SERVER['REQUEST_URI'];
+        $par = parse_url($url);
+        if (isset($par['query'])) {
+            parse_str($par['query'], $query);
+            unset($query['page']);
+            $url = $par['path'].'?'.http_build_query($query);
+        }
+        return $url;
+    }
+    // 设置页码
+    public function SetPage() {
+        if (!empty($_GET['page'])) {
+            if ($_GET['page'] > 0) {
+                if ($_GET['page'] > $this->pagenum) {
+                    return $this->pagenum;
+                } else {
+                    return $_GET['page'];
+                }
+                return $_GET['page'];
+            } else {
+                return 1;
+            }
+            return $_GET['page'];
+        } else {
+            return 1;
+        }
+    }
+    // 页码列表
+    private function PageList() {
+        for ($i=$this->bothnum; $i>=1; $i--) {
+            $page = $this->page - $i;
+            if ($page < 1) continue;
+            $pagelist .= "<a href='".$this->url."&page=".$page."'>【".$page."】</a>";
+        }
+        $pagelist .= "<span>【".$this->page."】</span>";
+        for ($i=1; $i<=$this->bothnum; $i++) {
+            $page = $this->page + $i;
+            if ($page > $this->pagenum) break;
+            $pagelist .= "<a href='".$this->url."&page=".$page."'>【".$page."】</a>";
+        }
+        return $pagelist;
     }
 }

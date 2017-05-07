@@ -75,7 +75,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-10" style="border-top: 1px solid #000000;">
+        <div class="col-md-10">
         <iframe name="order" src="/order/app/Home/View/index/user.html" frameborder="0" scrolling="auto" id="order" width="100%" height="500" style="display: block;"></iframe>
             <div class="mask">初阳点餐系统</div>
         </div>
