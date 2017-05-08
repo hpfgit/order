@@ -101,22 +101,34 @@ class IndexController extends Controller {
     }
     // 订单管理
     public function administrationorder() {
-        if (!empty(I("get.state"))) {
-            $state = I("get.state");
-            $model = M('order');
-            $userdata = $model->where("state='$state'")->select();
-            $userdataid = "userdataid";
-            if ($userdata) {
-                $this->assign('userdata', $userdata)->assign("userdataid", $userdataid);
-            }
-        } else {
-            $model = M('order');
-            $userdata = $model->where("state=0")->select();
-            $userdataid = "userdataid";
-            if ($userdata) {
-                $this->assign('userdata', $userdata)->assign("userdataid", $userdataid);
-            }
-        }
+//        if (!empty(I("get.state"))) {
+//            $state = I("get.state");
+//            $userdata = $model->where("state='$state'")->select();
+//            $userdataid = "userdataid";
+//            $this->PageList();
+//            if ($userdata) {
+//                $this->assign('userdata', $userdata)->assign("userdataid", $userdataid);
+//            }
+//        } else {
+//            $userdata = $model->where("state=0")->select();
+//            $userdataid = "userdataid";
+//            if ($userdata) {
+//                $this->assign('userdata', $userdata)->assign("userdataid", $userdataid);
+//            }
+//        }
+        $model = M('order');
+        $page = $this->GetPage();
+        $state = I("get.state");
+        $userdataid = "userdataid";
+        $count = $model->where("state='$state'")->count();
+        $pagedata = 1;
+        $pagenum = ceil($count/$pagedata);
+//        for ($i=1;$i<$pagenum;$i++) {
+//            $pagelist .= "<li><a href='/order/index.php/Index/administrationorder/state/$state/page/$i'>$i</a></li>";
+//        }
+        $pagedata = $model->where("state='$state'")->page($page,$pagedata)->select();
+        $this->assign("pagedata",$pagedata)->assign("userdataid",$userdataid)->assign("state",$state)->assign("total",$pagenum);
+        $this->PageList($page,$pagenum,$state);
         $this->display("user");
     }
     public function ownorder() {
@@ -226,37 +238,47 @@ class IndexController extends Controller {
         }
         return $url;
     }
-    // 设置页码
-    public function SetPage() {
-        if (!empty($_GET['page'])) {
-            if ($_GET['page'] > 0) {
-                if ($_GET['page'] > $this->pagenum) {
-                    return $this->pagenum;
-                } else {
-                    return $_GET['page'];
-                }
-                return $_GET['page'];
-            } else {
-                return 1;
-            }
-            return $_GET['page'];
+    // 获取页码
+    public function GetPage() {
+        if (empty(I("get.page"))) {
+            $page = 1;
         } else {
-            return 1;
+            $page = I("get.page");
         }
+        return $page;
     }
     // 页码列表
-    private function PageList() {
-        for ($i=$this->bothnum; $i>=1; $i--) {
-            $page = $this->page - $i;
-            if ($page < 1) continue;
-            $pagelist .= "<a href='".$this->url."&page=".$page."'>【".$page."】</a>";
+    private function PageList($page,$pagenum,$state) {
+        $start = 1;
+        $showpage = 5;
+        $pageoffset = ($showpage-1)/2;
+        $pagelist = "";
+        $end = $pagenum;
+        if ($pagenum > $showpage) {
+            if ($page > $pageoffset + 1) {
+                $pagelist .= "<li><a>...</a></li>";
+            }
+            if ($page > $pageoffset) {
+                $start = $page - $pageoffset;
+                $end = $pagenum > $pageoffset + $page ? $page + $pageoffset : $pagenum;
+            } else {
+                $start = 1;
+                $end = $pagenum > $showpage ? $showpage : $pagenum;
+            }
+            if ($page + $pageoffset > $pagenum) {
+                $start = $start - ($page + $pageoffset - $end);
+            }
         }
-        $pagelist .= "<span>【".$this->page."】</span>";
-        for ($i=1; $i<=$this->bothnum; $i++) {
-            $page = $this->page + $i;
-            if ($page > $this->pagenum) break;
-            $pagelist .= "<a href='".$this->url."&page=".$page."'>【".$page."】</a>";
+        for ($i=$start;$i<=$end;$i++) {
+            if ($page == $i) {
+                $pagelist .= "<li class='active'><a href='/order/index.php/Index/administrationorder/state/$state/page/$i'>$i</a></li>";
+                continue;
+            }
+            $pagelist .= "<li><a href='/order/index.php/Index/administrationorder/state/$state/page/$i'>$i</a></li>";
         }
-        return $pagelist;
+        if ($pagenum > $showpage && $pagenum > $page + $pageoffset) {
+            $pagelist .= "<li><a>...</a></li>";
+        }
+        $this->assign("pagelist",$pagelist);
     }
 }

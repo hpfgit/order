@@ -31,7 +31,7 @@
                                     <tr>
                                         <td>选择</td><td>信息</td><td>菜名</td><td>单价</td><td>数量</td><td>备注</td><td>操作</td>
                                     </tr>
-                                    <?php if(is_array($userdata)): foreach($userdata as $key=>$vo): ?><tr>
+                                    <?php if(is_array($pagedata)): foreach($pagedata as $key=>$vo): ?><tr>
                                             <td><?php if($vo["state"] != '1'): ?><input type="checkbox" value="<?php echo ($vo["id"]); ?>" name="check"><?php endif; ?></td>
                                             <td>餐桌号：<?php echo ($vo["number"]); ?></td>
                                             <td><?php echo ($vo["dishes"]); ?></td>
@@ -43,21 +43,19 @@
                                 </table>
                                 <button class="btn btn-default" id="btn">批量修改</button>
                                 <nav aria-label="Page navigation">
+                                    <input id="state" type="hidden" value="<?php echo ($state); ?>">
+                                    <input id="total" type="hidden" value="<?php echo ($total); ?>">
                                     <ul class="pagination">
-                                        <li>
-                                            <a href="#" aria-label="Previous">
+                                        <li class="btn-prev">
+                                            <span href="" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
-                                            </a>
+                                            </span>
                                         </li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li>
-                                            <a href="#" aria-label="Next">
+                                        <?php echo ($pagelist); ?>
+                                        <li class="btn-next">
+                                            <span href="" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
-                                            </a>
+                                            </span>
                                         </li>
                                     </ul>
                                 </nav>
@@ -167,7 +165,6 @@
                 }
                 string = str.substring(0,str.length-1);
             });
-//            alert(str);
         });
         $("#btn").click(function () {
             $.ajax({
@@ -185,6 +182,25 @@
                 }
             });
         });
+        var page = parseInt($(".active").find("a").html());
+        var state = $("#state").val();
+        var btnPrev = $(".btn-prev");
+        var btnNext = $(".btn-next");
+        var total = $("#total").val();
+        if (page == 1) {
+            btnPrev.addClass("disabled");
+        } else {
+            btnPrev.click(function () {
+                location.href = "/order/index.php/Index/administrationorder/state/" + state + "/page/" + (page-1);
+            });
+        }
+        if (page == total) {
+            btnNext.addClass("disabled");
+        } else {
+            btnNext.click(function () {
+                location.href = "/order/index.php/Index/administrationorder/state/" + state + "/page/" + (page+1);
+            });
+        }
     });
 </script>
 </body>
