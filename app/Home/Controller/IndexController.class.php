@@ -101,32 +101,44 @@ class IndexController extends Controller {
     }
     // 订单管理
     public function administrationorder() {
-//        if (!empty(I("get.state"))) {
-//            $state = I("get.state");
-//            $userdata = $model->where("state='$state'")->select();
-//            $userdataid = "userdataid";
-//            $this->PageList();
-//            if ($userdata) {
-//                $this->assign('userdata', $userdata)->assign("userdataid", $userdataid);
-//            }
-//        } else {
-//            $userdata = $model->where("state=0")->select();
-//            $userdataid = "userdataid";
-//            if ($userdata) {
-//                $this->assign('userdata', $userdata)->assign("userdataid", $userdataid);
-//            }
-//        }
         $model = M('order');
+        $order = M("order");
+        $menu = M("menu");
+        $dishes = $order->select();
+        foreach ($dishes as $key=>$value) {
+            $data[] = explode("|",$value["dishes"]);
+        }
+        foreach ($data as $value) {
+            foreach ($value as $value) {
+                $array[] = explode(":",$value);
+            }
+        }
+//        echo "<pre>";
+//        print_r($array);
+//        echo "</pre>";
         $page = $this->GetPage();
         $state = I("get.state");
         $userdataid = "userdataid";
         $count = $model->where("state='$state'")->count();
         $pagedata = 1;
         $pagenum = ceil($count/$pagedata);
-//        for ($i=1;$i<$pagenum;$i++) {
-//            $pagelist .= "<li><a href='/order/index.php/Index/administrationorder/state/$state/page/$i'>$i</a></li>";
-//        }
         $pagedata = $model->where("state='$state'")->page($page,$pagedata)->select();
+        foreach ($array as $value) {
+//            echo "<pre>";
+//            print_r($value);
+//            echo "</pre>";
+//            foreach ( $value as $value ) {
+//                echo $value;
+                $userorderingdata = $menu->where("id=$value[0]")->select();
+                $dishes = $userorderingdata[0]["dishes"];
+                $pagedata[0]["dishes"] = $dishes;
+                $pagedata[0]["number"] = $value[1];
+//            }
+        }
+//        echo "<pre>";
+//        print_r($pagedata);
+//        echo "</pre>";
+//        exit();
         $this->assign("pagedata",$pagedata)->assign("userdataid",$userdataid)->assign("state",$state)->assign("total",$pagenum);
         $this->PageList($page,$pagenum,$state);
         $this->display("user");

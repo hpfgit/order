@@ -18,7 +18,7 @@
                                             <td>餐桌号：{$vo.number}</td>
                                             <td>{$vo.dishes}</td>
                                             <td>{$vo.price}</td>
-                                            <td>数量：：</td>
+                                            <td>数量：{$vo.number}</td>
                                             <td>{$vo.beizhu}</td>
                                             <td><if condition="$vo.state eq '1'">已处理<else/><a href="/order/index.php/Index/modifystate/id/{$vo.id}">修改状态为已处理</a> </else></if></td>
                                         </tr>
@@ -28,7 +28,7 @@
                                 <nav aria-label="Page navigation">
                                     <input id="state" type="hidden" value="{$state}">
                                     <input id="total" type="hidden" value="{$total}">
-                                    <ul class="pagination">
+                                    <ul class="pagination pagination-lg">
                                         <li class="btn-prev">
                                             <span href="" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>

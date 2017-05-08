@@ -47,3 +47,7 @@ td {
     position: relative;
     left:0px;
     top:0px;}
+.btn-prev,.btn-next {
+    cursor: pointer;}
+nav {
+    margin:0 auto;}

@@ -36,7 +36,7 @@
                                             <td>餐桌号：<?php echo ($vo["number"]); ?></td>
                                             <td><?php echo ($vo["dishes"]); ?></td>
                                             <td><?php echo ($vo["price"]); ?></td>
-                                            <td>数量：：</td>
+                                            <td>数量：<?php echo ($vo["number"]); ?></td>
                                             <td><?php echo ($vo["beizhu"]); ?></td>
                                             <td><?php if($vo["state"] == '1'): ?>已处理<?php else: ?><a href="/order/index.php/Index/modifystate/id/<?php echo ($vo["id"]); ?>">修改状态为已处理</a> </else><?php endif; ?></td>
                                         </tr><?php endforeach; endif; ?>
@@ -45,7 +45,7 @@
                                 <nav aria-label="Page navigation">
                                     <input id="state" type="hidden" value="<?php echo ($state); ?>">
                                     <input id="total" type="hidden" value="<?php echo ($total); ?>">
-                                    <ul class="pagination">
+                                    <ul class="pagination pagination-lg">
                                         <li class="btn-prev">
                                             <span href="" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
